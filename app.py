@@ -503,19 +503,10 @@ FORMAL_STARTS = {
 
 # ── Loaders ───────────────────────────────────────────────────────────────────
 @st.cache_resource
+@st.cache_resource
 def load_spacy():
-    import subprocess
-    import sys
-
-    try:
-        return spacy.load('en_core_web_sm', disable=['ner','parser'])
-
-    except OSError:
-        subprocess.run(
-            [sys.executable, "-m", "spacy", "download", "en_core_web_sm"],
-            check=True
-        )
-        return spacy.load('en_core_web_sm', disable=['ner','parser'])
+    import spacy
+    return spacy.load("en_core_web_sm", disable=["ner", "parser"])
 
 @st.cache_resource
 def load_model():
