@@ -29,22 +29,21 @@ import io
 from datetime import datetime
 from huggingface_hub import hf_hub_download
 import os
-
 REPO_ID = "bushraasaleem/ai-detector-models"
 
-def download_models():
-    files = ["best_model.pkl", "tfidf_vectorizer.pkl", 
-             "feature_scaler.pkl", "feature_columns.pkl"]
-    for fname in files:
-        if not os.path.exists(fname):
-            print(f"Downloading {fname} from HuggingFace...")
-            hf_hub_download(
-                repo_id=REPO_ID, 
-                filename=fname, 
-                local_dir="."
-            )
+@st.cache_resource
+def load_model():
+    model = joblib.load(hf_hub_download(REPO_ID, "best_model.pkl"))
+    tfidf = joblib.load(hf_hub_download(REPO_ID, "tfidf_vectorizer.pkl"))
+    scaler = joblib.load(hf_hub_download(REPO_ID, "feature_scaler.pkl"))
+    cols = joblib.load(hf_hub_download(REPO_ID, "feature_columns.pkl"))
 
-download_models()  # ← this runs before anything else
+    return {
+        "model": model,
+        "tfidf": tfidf,
+        "scaler": scaler,
+        "feature_columns": cols
+    }
 
 # ── Page config ────────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -503,23 +502,9 @@ FORMAL_STARTS = {
 
 # ── Loaders ───────────────────────────────────────────────────────────────────
 @st.cache_resource
-@st.cache_resource
 def load_spacy():
     import spacy
     return spacy.load("en_core_web_sm", disable=["ner", "parser"])
-
-@st.cache_resource
-def load_model():
-    try:
-        return {
-            'model':           joblib.load('best_model.pkl'),
-            'tfidf':           joblib.load('tfidf_vectorizer.pkl'),
-            'scaler':          joblib.load('feature_scaler.pkl'),
-            'feature_columns': joblib.load('feature_columns.pkl'),
-        }
-    except FileNotFoundError as e:
-        st.error(f"Model file not found: {e}")
-        return None
 
 @st.cache_resource
 def load_word_lists():
