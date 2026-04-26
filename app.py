@@ -504,13 +504,18 @@ FORMAL_STARTS = {
 # ── Loaders ───────────────────────────────────────────────────────────────────
 @st.cache_resource
 def load_spacy():
+    import subprocess
+    import sys
+
     try:
-        nlp = spacy.load('en_core_web_sm', disable=['ner','parser'])
-        nlp.add_pipe('sentencizer')
-        return nlp
+        return spacy.load('en_core_web_sm', disable=['ner','parser'])
+
     except OSError:
-        st.error("spaCy model missing. Run: python -m spacy download en_core_web_sm")
-        return None
+        subprocess.run(
+            [sys.executable, "-m", "spacy", "download", "en_core_web_sm"],
+            check=True
+        )
+        return spacy.load('en_core_web_sm', disable=['ner','parser'])
 
 @st.cache_resource
 def load_model():
