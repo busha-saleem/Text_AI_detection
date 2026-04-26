@@ -27,6 +27,24 @@ import plotly.graph_objects as go
 import json
 import io
 from datetime import datetime
+from huggingface_hub import hf_hub_download
+import os
+
+REPO_ID = "busha-saleem/ai-detector-models"
+
+def download_models():
+    files = ["best_model.pkl", "tfidf_vectorizer.pkl", 
+             "feature_scaler.pkl", "feature_columns.pkl"]
+    for fname in files:
+        if not os.path.exists(fname):
+            print(f"Downloading {fname} from HuggingFace...")
+            hf_hub_download(
+                repo_id=REPO_ID, 
+                filename=fname, 
+                local_dir="."
+            )
+
+download_models()  # ← this runs before anything else
 
 # ── Page config ────────────────────────────────────────────────────────────────
 st.set_page_config(

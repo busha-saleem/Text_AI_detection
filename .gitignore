@@ -1,1 +1,4 @@
 test_env/
+*.pkl
+*.parquet
+upload_to_hf.py
