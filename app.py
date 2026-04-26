@@ -64,6 +64,9 @@ html, body, [data-testid="stAppViewContainer"] {
     color: #2D2D2D !important;
     font-family: 'Nunito', sans-serif !important;
 }
+/* ── Hide deploy button ── */
+[data-testid="stAppDeployButton"] { display: none !important; }
+button[kind="header"] { display: none !important; }
 
 /* Doodle paper texture background */
 [data-testid="stAppViewContainer"]::before {
