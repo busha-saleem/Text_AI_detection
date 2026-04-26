@@ -503,7 +503,7 @@ FORMAL_STARTS = {
 # ── Loaders ───────────────────────────────────────────────────────────────────
 @st.cache_resource
 def load_spacy():
-    try
+    try:
     return spacy.load("en_core_web_sm", disable=["ner", "parser"])
     nlp.add_pipe('sentencizer')
         return nlp
