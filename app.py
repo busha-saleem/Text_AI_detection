@@ -504,8 +504,8 @@ FORMAL_STARTS = {
 @st.cache_resource
 def load_spacy():
     try:
-    return spacy.load("en_core_web_sm", disable=["ner", "parser"])
-    nlp.add_pipe('sentencizer')
+        return spacy.load("en_core_web_sm", disable=["ner", "parser"])
+        nlp.add_pipe('sentencizer')
         return nlp
     except OSError:
         st.error("spaCy model missing. Run: python -m spacy download en_core_web_sm")
