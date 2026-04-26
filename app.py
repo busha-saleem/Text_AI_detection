@@ -782,6 +782,7 @@ def render_gauge(ai_p):
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
         value=ai_p * 100,
+        domain={'x': [0, 1], 'y': [0.2, 1]},
         number={'suffix':'%','font':{'family':'Nunito','size':38,'color':'#2D2D2D'}},
         title={'text':'AI Score','font':{'family':'Architects Daughter, cursive','size':14,'color':'#666'}},
         gauge={
@@ -801,8 +802,8 @@ def render_gauge(ai_p):
     fig.update_layout(
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
-        margin=dict(t=30, b=10, l=10, r=10),
-        height=230,
+        margin=dict(t=0, b=0, l=10, r=10),
+        height=180,
     )
     st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
 
@@ -973,6 +974,9 @@ def main():
     else:
         uploaded = st.file_uploader("Upload a PDF file", type=["pdf"])
         if uploaded:
+            if uploaded.size > 2 * 1024 * 1024:
+                st.error("⚠️ File too large! Please upload a PDF under 2MB for best performance.")
+                st.stop()
             raw_bytes = uploaded.read()
             pdf_bytes_buf = raw_bytes          # keep original for download
             try:
