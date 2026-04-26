@@ -30,7 +30,7 @@ from datetime import datetime
 from huggingface_hub import hf_hub_download
 import os
 
-REPO_ID = "busha-saleem/ai-detector-models"
+REPO_ID = "bushraasaleem/ai-detector-models"
 
 def download_models():
     files = ["best_model.pkl", "tfidf_vectorizer.pkl", 
