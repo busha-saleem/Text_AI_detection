@@ -929,8 +929,8 @@ def main():
         st.markdown("""
         <div style="font-size:0.85rem;font-weight:600;line-height:2;">
             🔴 <b>AI</b> — probability &gt; 70%<br>
-            🟡 <b>Uncertain</b> — 30% – 70%<br>
-            🟢 <b>Human</b> — probability &lt; 30%
+            🟡 <b>Uncertain</b> — 50% – 70%<br>
+            🟢 <b>Human</b> — probability &lt; 50%
         </div>
         """, unsafe_allow_html=True)
 
@@ -940,6 +940,11 @@ def main():
             Uses windowed context prediction —<br>
             each sentence is scored with its<br>
             surrounding neighbours for accuracy.
+        </div>
+         <div style="font-size:0.75rem;color:#888;font-weight:600;">
+            we have used lr as baseline  —<br>
+            less robust on real world data then models as roberta<br>
+        s
         </div>
         """, unsafe_allow_html=True)
 
