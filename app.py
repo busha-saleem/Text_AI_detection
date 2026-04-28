@@ -828,8 +828,8 @@ def render_highlighted_text(result):
     st.markdown("""
     <div class="legend">
         <span><span class="legend-dot dot-ai"></span>AI (&gt;70%)</span>
-        <span><span class="legend-dot dot-uncertain"></span>Uncertain (30–70%)</span>
-        <span><span class="legend-dot dot-human"></span>Human (&lt;30%)</span>
+        <span><span class="legend-dot dot-uncertain"></span>Uncertain (50–70%)</span>
+        <span><span class="legend-dot dot-human"></span>Human (&lt;50%)</span>
     </div>
     """, unsafe_allow_html=True)
     parts = ['<div class="sent-annotated slide-up-2">']
