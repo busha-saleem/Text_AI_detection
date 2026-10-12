@@ -2,7 +2,7 @@
 
 Classifies text as **AI-generated (1)** or **human-written (0)** using TF-IDF n-grams plus 10 stylometric features, with a Streamlit web app for inference.
 
-**Authors:** Bushra Malik & Ishrat Akbar
+**Authors:** Bushra Malik 
 **Dataset:** [bushraasaleem/AI-detection-datsets](https://huggingface.co/datasets/bushraasaleem/AI-detection-datsets)
 
 ## Results
